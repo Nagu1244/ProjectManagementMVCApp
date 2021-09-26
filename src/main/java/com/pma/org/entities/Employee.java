@@ -24,7 +24,7 @@ public class Employee {
 	private String firstName;
 	private String lastName;
 	private String email;
-
+ //Code changed For GitHub Push
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
 	@JoinTable(name = "project_employee", joinColumns = @JoinColumn(name = "employee_id"), inverseJoinColumns = @JoinColumn(name = "project_id"))
