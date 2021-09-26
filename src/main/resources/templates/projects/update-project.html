@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts::header">
+
+    <title>Create Project</title>
+</head>
+<body>
+  <nav th:replace="layouts::navbar"></nav>
+<br/>
+  <div class="container">
+     <form  th:action="@{/projects/edit(id=${project.projectId})}" method="POST" th:object="${project}">
+          <div class="form-group row">
+         <p>Project Name:<input type="text" placeholder="Project Name" th:field="${project.name}"></input></p>
+           </div>
+           <div class="form-group row">
+           <label>ProjectsAssignedTo:
+              <select th:field="*{employees}" multiple="multiple">
+                  <option th:each="employee:${allEmployees}"
+                          th:value="${employee.employeeId}"
+                          th:text="${employee.firstName}" />
+              </select>
+           </label>
+           </div>
+           
+           <div class="form-group row">
+         <p>Project Status:
+         <select th:field="${project.stage}" required>
+            <option th:value="NOTSTARTED">Not Started</option>
+            <option th:value="INPROGRESS">In Progress</option>
+            <option th:value="COMPLETED">completed</option>
+         </select>
+       
+         </p>
+         </div>
+         <div class="form-group row">
+        <label> Project Description <textarea type="text" placeholder="Enter Project Description" th:field="${project.description}"></textarea></label>
+         </div>
+         
+         
+        <div class="form-group row">
+         <label>Project Start Date:
+         <input  id="dp3" type="text" class="mb-4 col-8 col-xs-4" value="Start Date" th:field="${project.startDate}">
+         </label>
+         </div>
+         
+         
+		<div class="form-group row">
+		<label>Project End Date:
+			<input  id="dp4" type="text" class="mb-4 col-8 col-xs-4" value="End Date" th:field="${project.endDate}">
+		</label>
+		</div>
+		
+		<script type="text/javascript">
+	      	$('#dp3').datepicker();
+	      	$('#dp4').datepicker();
+	      </script>
+         
+         
+         
+         <input type="submit" value="Submit"> 
+          </form>
+  </div>
+</body>
+</html>

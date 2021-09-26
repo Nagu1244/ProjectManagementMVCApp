@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+ <html xmlns:th="http://www.org.thymeleaf.com">
+ <head th:replace="layouts::header">
+
+    <title></title>
+</head>
+<body>  
+    <nav th:replace="layouts::navbar"></nav>
+
+      <dev class="container">
+            <h1>Project Directory</h1> 
+         <!-- <dev class="container"> -->   
+            <!-- <Add Project Button> -->
+            <a th:href="@{/projects/new}" class="btn btn-primary btn-sm mb-3">Add Project</a>
+           <!--  <dev class="col-md-6"> -->
+           <table class="table table-striped table-bordered table-hover">
+                <thead class="thead-dark">
+                   <tr>
+                      <th>Project Name</th>
+                      <th>Project Stage</th>
+                      <th>Project Description</th>
+                      <th>Project StartDate</th>
+                      <th>Project EndDate</th>
+                      <th>Action</th>
+                   </tr>
+                </thead>
+                <tbody>
+                   <tr th:each="project:${projects}">
+                      <td th:text="${project.name}"/>
+                      <td th:text="${project.stage}"></td>
+                      <td th:text="${project.description}"></td>
+                      <td th:text="${project.startDate}"></td>
+                      <td th:text="${project.endDate}"></td>
+                      <td>
+                      <a th:href="@{/projects/update(id=${project.projectId})}" 
+                      class="btn btn-primary btn-sm">Update</a>
+                      <a th:action="@{/projects/delete(id=${project.projectId})}" 
+                      class="btn btn-danger btn-sm" 
+                      onClick="if (!(confirm('Are you sure you want to delete this employee?'))) return false">Delete</a>
+                      </td>
+                   </tr>
+                </tbody>
+           </table>
+        
+          
+     </dev>
+   
+     
+</body>
+</html>
