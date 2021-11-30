@@ -50,14 +50,16 @@ public class ProjectController {
 	{
 		
          service.saveProject(project);
-		//get the employess by from DB findAllById() method
 		/*
+		 * //get the employess by from DB findAllById() method
+		 * 
 		 * List<Employee> listemp=empservice.getAllEmployeesById(employees); //listemp
 		 * has project ids(foreign keys). we have to set these values to Employee table
 		 * for(Employee emp:listemp) { emp.setProject(project); emprepo.save(emp);
 		 * 
 		 * }
 		 */
+		 
 		return "redirect:/projects";
 	}
 	@RequestMapping("")
@@ -91,8 +93,8 @@ public class ProjectController {
 		return "redirect:/projects";
 	}
 	
-	@RequestMapping(value="/delete")
-	public String deleteProject(@RequestParam("id") Long projectId)
+	@RequestMapping(value="/delete/{projectId}",method = RequestMethod.GET)
+	public String deleteProject(@PathVariable(name="projectId") Long projectId)
 	{
 		service.deleteProjectById(projectId);
 		return "redirect:/projects";

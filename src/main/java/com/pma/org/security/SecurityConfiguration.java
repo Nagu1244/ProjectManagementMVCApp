@@ -30,10 +30,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().
-		  // antMatchers("/employees/new").hasAuthority("ADMIN").
-		//antMatchers("/employees/save").hasAuthority("ADMIN").//hasRole need to update DB update projectmanagementapp.user_accounts set role='ROLE_ADMIN'  where username='Shabad';
-		//antMatchers("/projects/new").hasAuthority("ADMIN").
-		//antMatchers("/projects/save").hasAuthority("ADMIN").
+		  antMatchers("/employees/new").hasAuthority("ADMIN").
+		antMatchers("/employees/save").hasAuthority("ADMIN").//hasRole need to update DB update projectmanagementapp.user_accounts set role='ROLE_ADMIN'  where username='Shabad';
+		antMatchers("/projects/new").hasAuthority("ADMIN").
+		antMatchers("/projects/save").hasAuthority("ADMIN").
 		antMatchers("/","/**").permitAll().and().formLogin();
 		//http.csrf().disable();
 	}

@@ -31,7 +31,9 @@ public class AccountController {
 	@RequestMapping(value="/register/save",method=RequestMethod.POST)
 	public String saveUser(Model model,UserAccounts user)
 	{
+		
 		user.setPassword(bCryptEncoder.encode(user.getPassword()));
+		
 		accountRepo.save(user);
 		return "redirect:/home";
 	}

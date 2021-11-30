@@ -22,6 +22,18 @@
               <br/>
               <label>Email Address:<input type="email" placeholder="xyz@gmail.com" th:field="${employee.email}" required/></label>
               <br/>
+              <label>Employee Designation:<input type="text" placeholder="Designation" th:field="${employee.designation}" required/></label>
+              <br/>
+              <!-- <label>Reporting Manager Name:<input type="text" placeholder="Manager Name" th:field="${employee.reportingManager}" required/></label>
+               -->
+              <label>Reporting Manager Name:
+              <select th:field="*{manager}">
+              <option th:each="oneByone:${allManagers}"
+                      th:value="${oneByone.managerId}"
+                      th:text="${oneByone.name}" />
+              </select>
+              </label>
+              <br/>
               <input type="submit" value="Submit"/>
               <!-- <input type="reset" value="Reset"/> -->
            <!-- <input type="hidden" name="_csrf" th:value="${_csrf.token}"/> -->

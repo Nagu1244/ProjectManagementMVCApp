@@ -1,6 +1,7 @@
 package com.pma.org.controllers;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,11 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.pma.org.entities.Employee;
+import com.pma.org.entities.Manager;
 import com.pma.org.repositories.EmployeeRepository;
 import com.pma.org.services.Impl.EmployeeServiceImpl;
+import com.pma.org.services.Impl.ManagerServiceImpl;
 
 @Controller
 @RequestMapping("/employees")
@@ -24,11 +26,15 @@ public class EmployeeController {
 	private EmployeeServiceImpl empservice;
 	@Autowired
 	private EmployeeRepository emprepo;
+	@Autowired
+	private ManagerServiceImpl managerServiceImpl;
 	
 	@RequestMapping(value="/new") 
 	public String createProject(Model model)
 	{
 		model.addAttribute("employee", new Employee());
+		Set<Manager> setManagers=managerServiceImpl.getAllManagers();
+		model.addAttribute("allManagers", setManagers);
 		return "employer/new-employee";
 	}
 	//changed from Model to Model Attribute
@@ -38,8 +44,8 @@ public class EmployeeController {
 		empservice.saveEmployeeDetails(employee);
 		return "redirect:/employees";
 	}
-	@RequestMapping("")
-	public String getAllEmployees(Model model)
+	@RequestMapping
+	public String getAllEmployeesWithManager(Model model)
 	{
 		List<Employee> listemp=empservice.getListOfEmployees();
 		model.addAttribute("listOfEmployees", listemp);
